@@ -1,11 +1,11 @@
 .message-panel {
-    float: left;
-    clear: both;
-    width: 51%;
-    background-color: $message-bg;
+    // float: left;
+    // clear: both;
+    // width: 100%;
     color: $knockout-color;
     margin-bottom: 1em;
-    padding: 1em;
+    // padding: 1em;
+    width: 100%;
     border-radius: $rounded;
     display: flex;
     .user-initial {
@@ -26,6 +26,38 @@
         }
     }
     .message-wrapper {
-        margin-left: 1em;
+        max-width: 50%;
+        // margin-left: 1em;
+        .msg-text {
+            margin-top: 5px;
+            padding: 10px;
+            background-color: darkcyan;
+            text-align: left;
+            word-wrap: break-word;
+            border-radius: 5px;
+        }
     }
+    img {
+        margin: 0px 10px;
+        width: 55px;
+        height: 55px;
+        border-radius: 5px;
+    }
+}
+
+.justify-end {
+    justify-content: end;
+}
+
+.text-start {
+    text-align: left;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.bg-white {
+    background-color: white !important;
+    color: black;
 }

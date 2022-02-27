@@ -6,10 +6,58 @@
     opacity: 0.4;
 }
 
+body {
+    width: 100%;
+    height: 100vh;
+    color: #fff;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
 #welcome-wrapper {
     text-align: center;
+    color: black;
     h2 {
-        font-size: 1.5em;
+        font-size: 2em;
         margin: 30px 0 10px 0;
     }
     input {
@@ -29,5 +77,52 @@
         border: thin solid $border-color;
         border-radius: $rounded;
         margin: 1em 0.5em;
+    }
+    .login_right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2em;
+        label {
+            font-size: 1.2em;
+        }
+        .right_container {
+            margin: 20px auto;
+            width: 90%;
+            .user {
+                width: 95%;
+                border: 1px solid #ccc;
+                font-size: 14px;
+                line-height: 30px;
+                padding-left: 10px;
+                display: block;
+            }
+            .chooseAvatar {
+                margin-top: 2em;
+            }
+            .avatarWrap {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid rgb(23, 153, 204);
+                border-radius: 10px;
+                margin-top: 1em;
+                li {
+                    cursor: pointer;
+                    width: 50px;
+                    height: 50px;
+                    padding: 7px;
+                    img {
+                        width: 50px;
+                        height: 50px;
+                    }
+                    .active {
+                        border: 3px solid #0105d6;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
     }
 }
