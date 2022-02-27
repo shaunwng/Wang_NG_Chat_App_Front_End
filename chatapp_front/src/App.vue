@@ -12,7 +12,7 @@
   </section>
 </template>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -20,7 +20,15 @@
   text-align: center;
   color: #2c3e50;
 }
-
+header{
+text-align: center;
+background-color: blue;
+padding: 1em 0.8em;
+color: white;
+}
+header{
+  .hidden{display: none;}
+   h2{font-size: 2.5em; margin-bottom: 0.8em;}}
 #nav {
   padding: 30px;
 }

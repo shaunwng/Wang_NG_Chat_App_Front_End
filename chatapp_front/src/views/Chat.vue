@@ -1,5 +1,132 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+    <main>
+        <h1 class="welcome-message">Welcome to The Chat Component {{ ChatUserName }}</h1>
+
+        <section id="chat">
+            <!-- this left-hand side of our UI where we see current users -->
+            <section id="chat-users-ui">
+                <h2>Current Users:</h2>
+                <!-- list of users-->
+                <ul id="current-users">
+                    <!-- this will take a sub-component that will render-->
+                </ul>
+            </section>
+
+        <!-- end left hand-->
+
+        <!-- main chat UI-->
+
+            <section id="chat-messages-ui">
+                <!-- custom chat message component here -->
+                <ChatMessage
+                    v-for="msg in messages"
+                    :key="msg.id"
+                    :message="msg.message"
+                    :username="msg.user"
+                />
+
+
+                <section id="text-wrapper">
+                    <textarea @keyup="trySendMessage" id="message" v-model="message" placeholder="What's on your mind?"></textarea>
+
+                    <button
+                    id="sendMessage"
+                    @click="sendMessage"
+                    :class="{ 'disabled' : canSend }"
+                    :disabled="canSend"
+                    >
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                </section>
+            </section>
+        </section>
+    </main>
 </template>
+
+<script>
+import io from "socket.io-client";
+import vars from "@/env.js";
+import ChatMessage from '@/components/ChatMessage.vue';
+
+export default {
+  name:"TheChatComponent",
+
+  props: {
+    ChatUserName: String
+  },
+
+  mounted() {
+      let vm = this;
+
+      this.socket.on("CONNECTED", (id) => {
+          vm.socketID = id;
+      })
+
+      this.socket.on('MESSAGE',(message) => {
+          // [...] is a the spread operator
+          // short hand way to add something to an array, or put
+          // 2 arrays together,etc
+          vm.messages = [...vm.messages, message];
+          console.log(message);
+      })
+
+      this.socket.on('SOMEONE_TYPING',(data)=> console.log('someone is typing', data));
+  },
+
+//   computed: {
+//       messageContent: function(){
+//           return this.message.trim() === '';
+//       }
+//   },
+
+  computed: {
+    canSend: function() {
+      return (this.message.trim() === "")//evaluated to true or false
+    }
+  },
+
+  data() {
+      return {
+          socketID: '',
+          message: '',
+          messages: [],
+
+          // set up the socket connection on the front end
+          // this connects to the service runnning on port 3000
+          socket: io(vars.basePath,{
+              withCredentials: false,
+              extraHeaders: {
+                  'Access-Control-Allow-Origin' : '*'
+              }
+          })
+      }
+  },
+
+  methods: {
+      sendMessage(){
+          this.socket.emit('SEND_MESSAGE',{user: this.ChatUserName || "Anonymous", message: this.message})
+
+        // empty out the text area and get ready to input a new message
+          this.message = '';
+      },
+
+      trySendMessage(event) {
+          console.log('typing a message');
+
+
+        //if the enter is pushed and canSend has a value, then call the sendMessage method
+        if(event.keyCode === 13 && this.canSend === false){
+            this.sendMessage();
+        }else{
+             // else fire off the USER_TYPING event to the Chat Serve.
+            this.socket.emit('USER_TYPING',{ user: this.username || "Anonymous"});
+        }
+    }
+  },
+
+  components:{
+      ChatMessage
+  }
+}
+</script>
+
