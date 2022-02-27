@@ -7,14 +7,14 @@
     <h1 class="hidden">Sign In</h1>
     <!-- <h2>Welcome to the Chat App</h2> -->
     <div v-if="isShow">
-      <div class="login_left">
-        <div class="left_container">
+      <div class="login_top">
+        <div class="top_container">
           <h2>Welcome to the Fanshawe Chatroom</h2>
         </div>
       </div>
 
-      <div class="login_right">
-        <div class="right_container">
+      <div class="login_bottom">
+        <div class="bottom_container">
           <input
             type="text"
             name="username"
@@ -181,9 +181,6 @@ export default {
 
   }
 };
-
-
-
 </script>
 
 <style lang="scss">
