@@ -58,7 +58,7 @@ cd chatapp_front
 ```sh
 npm install
 ```
-3. Run serve at localhost:8080
+4. Run serve at localhost:8080
 ```sh
 npm run serve
 ```
