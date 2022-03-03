@@ -18,6 +18,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
+  * [Tips](#tips)
 * [New Functions](#new-functions)
 * [References](#references)
 * [Contact](#contact)
@@ -66,6 +67,19 @@ App running at:
   - Local:   http://localhost:8080/
   - Network: http://192.168.2.120:8080/
 
+### Tips
+1. If you see an error occurred in terminal like below👇
+```sh
+Syntax Error: Error: `sass-loader` requires `node-sass` >=4. Please install a compatible version.
+```
+Don't worry. Try remove node--sass and sass-loader and install again, It may fix the problem.
+```sh
+run:
+npm r -s node-sass
+npm r -D sass-loader
+npm i -D sass-loader@7.0.0
+npm i -D node-sass
+```
 ## New Functions
 * A custom avatar per user
     <p><img src="chatapp_front/src/assets/avatar.png" alt="avatar function"></p>
